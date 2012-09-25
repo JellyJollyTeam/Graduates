@@ -25,9 +25,7 @@ import java.util.List;
  */
 public interface WordBookDataAccess {
     
-    List<Word> getWordBookById(long wordBookId);
-    
-    List<Word> getWordBookByUserId(long userId);
+    List<? extends Word> getWordsByUserId(long userId);
     
     void addWord(long wordId, long userId);
     

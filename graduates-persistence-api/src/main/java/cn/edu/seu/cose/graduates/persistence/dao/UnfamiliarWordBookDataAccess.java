@@ -16,10 +16,16 @@
  */
 package cn.edu.seu.cose.graduates.persistence.dao;
 
+import cn.edu.seu.cose.graduates.persistence.model.Word;
+import java.util.List;
+
 /**
  *
  * @author rAy <predator.ray@gmail.com>
  */
 public interface UnfamiliarWordBookDataAccess extends WordBookDataAccess {
+    
+    @Override
+    List<Word> getWordsByUserId(long userId);
     
 }
