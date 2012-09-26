@@ -25,10 +25,10 @@ import java.util.List;
  */
 public interface WordBookDataAccess {
     
-    List<? extends Word> getWordsByUserId(long userId);
+    List<Word> getWordsByUserId(long userId) throws DataAccessException;
     
-    void addWord(long wordId, long userId);
+    void addWord(long wordId, long userId) throws DataAccessException;
     
-    void deleteWord(long wordId, long userId);
+    void deleteWord(long wordId, long userId) throws DataAccessException;
     
 }

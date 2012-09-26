@@ -16,7 +16,7 @@
  */
 package cn.edu.seu.cose.graduates.persistence.dao;
 
-import cn.edu.seu.cose.graduates.persistence.model.Word;
+import cn.edu.seu.cose.graduates.persistence.model.BookedWord;
 import java.util.List;
 
 /**
@@ -25,7 +25,7 @@ import java.util.List;
  */
 public interface UnfamiliarWordBookDataAccess extends WordBookDataAccess {
     
-    @Override
-    List<Word> getWordsByUserId(long userId);
+    List<BookedWord> getBookedWordsByUserId(long userId)
+            throws DataAccessException;
     
 }

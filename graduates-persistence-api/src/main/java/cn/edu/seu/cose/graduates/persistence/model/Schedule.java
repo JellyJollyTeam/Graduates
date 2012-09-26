@@ -26,6 +26,6 @@ import java.util.List;
  */
 public class Schedule {
     
-    private List<Date> timeTable;
+    private List<Date> deltaTimeTable;
 
 }

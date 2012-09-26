@@ -14,13 +14,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package cn.edu.seu.cose.graduates.persistence.dao;
+
+import cn.edu.seu.cose.graduates.persistence.model.Word;
 
 /**
  *
- * @author zc, rAy <predator.ray@gmail.com>
+ * @author rAy <predator.ray@gmail.com>
  */
-public interface FamiliarWordBookDataAccess extends WordBookDataAccess {
+public interface WordDataAccess {
+    
+    Word getWordById(long wordId) throws DataAccessException;
+    
+    long createWord(String english, String explanation) throws DataAccessException;
+    
+    void updateWord(Word word) throws DataAccessException;
+    
+    void updateWordExplanation(long wordId, String explanation)
+            throws DataAccessException;
+    
+    void deleteWord(long wordId) throws DataAccessException;
     
 }

@@ -17,12 +17,32 @@
 
 package cn.edu.seu.cose.graduates.persistence.model;
 
+import java.util.Date;
+
 /**
  *
  * @author rAy <predator.ray@gmail.com>
  */                                                                                            
 public class BookedWord extends Word {
     
-    private Schedule schedule;
+    private int phase;
+    
+    private Date entryTime;
+
+    public int getPhase() {
+        return phase;
+    }
+
+    public void setPhase(int phase) {
+        this.phase = phase;
+    }
+
+    public Date getEntryTime() {
+        return entryTime;
+    }
+
+    public void setEntryTime(Date entryTime) {
+        this.entryTime = entryTime;
+    }
 
 }

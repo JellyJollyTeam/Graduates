@@ -15,44 +15,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cn.edu.seu.cose.graduates.persistence.model;
+package cn.edu.seu.cose.graduates.persistence.dao;
 
+import cn.edu.seu.cose.graduates.persistence.model.Dictionary;
+import cn.edu.seu.cose.graduates.persistence.model.Word;
 import java.util.List;
 
 /**
  *
  * @author rAy <predator.ray@gmail.com>
  */
-public class Dictionary {
+public interface DictionaryDataAccess {
     
-    private long id;
+    Dictionary getDictionaryById(long dictId) throws DataAccessException;
     
-    private String name;
+    long createDictionary(String dictName, List<Word> words)
+            throws DataAccessException;
     
-    private List<Word> words;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Word> getWords() {
-        return words;
-    }
-
-    public void setWords(List<Word> words) {
-        this.words = words;
-    }
+    void updateDictionnaryName(String name) throws DataAccessException;
+    
+    Word referTo(long dictId, String english) throws DataAccessException;
+    
+    void deleteDictionary(long dictId) throws DataAccessException;
 
 }

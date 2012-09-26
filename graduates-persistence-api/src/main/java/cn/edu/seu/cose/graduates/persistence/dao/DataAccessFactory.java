@@ -14,13 +14,22 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package cn.edu.seu.cose.graduates.persistence.dao;
 
 /**
  *
- * @author zc, rAy <predator.ray@gmail.com>
+ * @author rAy <predator.ray@gmail.com>
  */
-public interface FamiliarWordBookDataAccess extends WordBookDataAccess {
+public interface DataAccessFactory {
+    
+    DictionaryDataAccess getDictionaryDataAccess();
+    
+    FamiliarWordBookDataAccess getFamiliarWordBookDataAccess();
+    
+    UnfamiliarWordBookDataAccess getUnfamiliarWordBookDataAccess();
+    
+    UserDataAccess getUserDataAccess();
+    
+    WordDataAccess getWordDataAccess();
     
 }
