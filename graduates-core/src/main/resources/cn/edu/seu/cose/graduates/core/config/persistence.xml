@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+    <!-- MySQL DataSource instance -->
+    <bean id="dateSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://127.0.0.1/graduates_schema" />
+        <property name="username" value="root" />
+        <property name="password" value="root" />
+        <property name="initialSize" value="5" />
+        <property name="maxActive" value="10" />
+    </bean>
+    
+    <!-- DictionaryDataAccess instance -->
+    <bean id="dictionaryDao"
+          class="cn.edu.seu.cose.graduates.persistence.dao.impl.DictionaryDataAccessImpl">
+        <constructor-arg ref="dateSource" />
+    </bean>
+    
+    <!-- FamiliarWordBookDataAccess instance -->
+    <bean id="familiarWordBookDao" class="cn.edu.seu.cose.graduates.persistence.dao.impl.FamiliarWordBookDataAccessImpl">
+        <constructor-arg ref="dateSource" />
+    </bean>
+    
+    <!-- UnFamiliarWordBookDataAccess instance -->
+    <bean id="unfamiliarWordBookDao" class="cn.edu.seu.cose.graduates.persistence.dao.impl.UnfamiliarWordBookDataAccessImpl">
+        <constructor-arg ref="dateSource" />
+    </bean>
+    
+    <!-- UserDataAccess instance -->
+    <bean id="userDao" class="cn.edu.seu.cose.graduates.persistence.dao.impl.UserDataAccessImpl">
+        <constructor-arg ref="dateSource" />
+    </bean>
+    
+    <!-- WordDataAccess instance -->
+    <bean id="wordDao" class="cn.edu.seu.cose.graduates.persistence.dao.impl.WordDataAccessImpl">
+        <constructor-arg ref="dateSource" />
+    </bean>
+</beans>
