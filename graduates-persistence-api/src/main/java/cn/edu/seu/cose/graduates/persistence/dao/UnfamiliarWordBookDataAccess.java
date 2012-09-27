@@ -28,4 +28,7 @@ public interface UnfamiliarWordBookDataAccess extends WordBookDataAccess {
     List<BookedWord> getBookedWordsByUserId(long userId)
             throws DataAccessException;
     
+    void updatePhase(long userId, long wordId, long phaseId)
+            throws DataAccessException;
+    
 }
