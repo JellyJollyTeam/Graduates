@@ -8,3 +8,6 @@
 /graduates-persistence-impl/target/
 /graduates-core/target/
 /graduates-dist/target/
+
+# System Files #
+.DS_Store
