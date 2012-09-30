@@ -4,3 +4,7 @@
 *.jar
 *.war
 *.ear
+/graduates-persistence-api/target/
+/graduates-persistence-impl/target/
+/graduates-core/target/
+/graduates-dist/target/
