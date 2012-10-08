@@ -17,6 +17,7 @@
 package cn.edu.seu.cose.graduates.persistence.dao;
 
 import cn.edu.seu.cose.graduates.persistence.model.BookedWord;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,7 +29,16 @@ public interface UnfamiliarWordBookDataAccess extends WordBookDataAccess {
     List<BookedWord> getBookedWordsByUserId(long userId)
             throws DataAccessException;
     
-    void updatePhase(long userId, long wordId, long phaseId)
+    List<BookedWord> getBookedWordsByPhase(long userId, int phase)
+            throws DataAccessException;
+    
+    List<BookedWord> getBookedWordsByPhaseForTest(long userId, int phase,
+            Date currentDate) throws DataAccessException;
+    
+    BookedWord getBookedWord(long userId, long wordId)
+            throws DataAccessException;
+    
+    void updatePhase(long userId, long wordId, int phase, Date entryTime)
             throws DataAccessException;
     
 }

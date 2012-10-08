@@ -28,4 +28,12 @@ public class Schedule {
     
     private List<Date> deltaTimeTable;
 
+    public List<Date> getDeltaTimeTable() {
+        return deltaTimeTable;
+    }
+
+    public void setDeltaTimeTable(List<Date> deltaTimeTable) {
+        this.deltaTimeTable = deltaTimeTable;
+    }
+
 }

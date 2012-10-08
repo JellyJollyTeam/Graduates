@@ -28,6 +28,8 @@ public interface UserDataAccess {
     
     User getUserById(long userId) throws DataAccessException;
     
+    User getUserByUsername(String username) throws DataAccessException;
+    
     User createUser(String username, String password) throws DataAccessException;
     
     void updateSchedule(long userId, Schedule schedule) throws DataAccessException;

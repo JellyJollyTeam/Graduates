@@ -21,34 +21,40 @@ import cn.edu.seu.cose.graduates.persistence.dao.DataAccessException;
 import cn.edu.seu.cose.graduates.persistence.dao.UserDataAccess;
 import cn.edu.seu.cose.graduates.persistence.model.Schedule;
 import cn.edu.seu.cose.graduates.persistence.model.User;
+import javax.sql.DataSource;
 
 /**
  *
  * @author rAy <predator.ray@gmail.com>
  */
-public class UserDataAccessImpl implements UserDataAccess {
+public class UserDataAccessImpl extends AbstractDataAccess
+        implements UserDataAccess {
+    
+    public UserDataAccessImpl(DataSource dataSource) {
+        super(dataSource);
+    }
 
     public User getUserById(long userId) throws DataAccessException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public User createUser(String username, String password)
-            throws DataAccessException {
+    public User getUserByUsername(String username) throws DataAccessException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void updateSchedule(long userId, Schedule schedule)
-            throws DataAccessException {
+    public User createUser(String username, String password) throws DataAccessException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void updateUsername(long userId, String username)
-            throws DataAccessException {
+    public void updateSchedule(long userId, Schedule schedule) throws DataAccessException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void updatePassword(long userId, String password)
-            throws DataAccessException {
+    public void updateUsername(long userId, String username) throws DataAccessException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void updatePassword(long userId, String password) throws DataAccessException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

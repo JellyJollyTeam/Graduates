@@ -21,6 +21,7 @@ import cn.edu.seu.cose.graduates.persistence.dao.DataAccessException;
 import cn.edu.seu.cose.graduates.persistence.dao.UnfamiliarWordBookDataAccess;
 import cn.edu.seu.cose.graduates.persistence.model.BookedWord;
 import cn.edu.seu.cose.graduates.persistence.model.Word;
+import java.util.Date;
 import java.util.List;
 import javax.sql.DataSource;
 
@@ -35,13 +36,23 @@ public class UnfamiliarWordBookDataAccessImpl
         super(dataSource);
     }
 
-    public List<BookedWord> getBookedWordsByUserId(long userId)
-            throws DataAccessException {
+    public List<BookedWord> getBookedWordsByUserId(long userId) throws DataAccessException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void updatePhase(long userId, long wordId, long phaseId)
-            throws DataAccessException {
+    public List<BookedWord> getBookedWordsByPhase(long userId, int phase) throws DataAccessException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public List<BookedWord> getBookedWordsByPhaseForTest(long userId, int phase, Date currentDate) throws DataAccessException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public BookedWord getBookedWord(long userId, long wordId) throws DataAccessException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void updatePhase(long userId, long wordId, int phase, Date entryTime) throws DataAccessException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
