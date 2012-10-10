@@ -24,6 +24,7 @@ import cn.edu.seu.cose.graduates.persistence.dao.UserDataAccess;
 import cn.edu.seu.cose.graduates.persistence.model.BookedWord;
 import cn.edu.seu.cose.graduates.persistence.model.Schedule;
 import cn.edu.seu.cose.graduates.persistence.model.User;
+import cn.edu.seu.cose.graduates.persistence.model.Word;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -119,6 +120,11 @@ public class WordBookService {
             throws DataAccessException {
         Date currentDate = new Date();
         unfamiliarWordBookDao.updatePhase(userId, wordId, 0, currentDate);
+    }
+    
+    public List<BookedWord> getWordsForView(long userId)
+            throws DataAccessException {
+        return unfamiliarWordBookDao.getBookedWordsByPhase(userId, 0);
     }
     
     public List<BookedWord> getWordsForTest(long userId, int phase)
