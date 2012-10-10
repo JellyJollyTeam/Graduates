@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+    <import resource="graduates-service.xml" />
+    <import resource="graduates-model-and-view.xml" />
+    
+    <bean id="homeController" class="cn.edu.seu.cose.graduates.core.controller.HomeController">
+        <constructor-arg ref="userAccountService" />
+        <constructor-arg ref="wordBookService" />
+        <property name="homeModelAndView" ref="homeModelAndView" />
+        <property name="loginModelAndView" ref="loginModelAndView" />
+        <property name="registerModelAndView" ref="registerModelAndView" />
+    </bean>
+    
+    <bean id="promoteController" class="cn.edu.seu.cose.graduates.core.controller.PromoteController">
+        <constructor-arg ref="wordBookService" />
+        <property name="redirectModelAndView" ref="redirectToLoginModelAndView" />
+    </bean>
+    
+    <bean id="loginController" class="cn.edu.seu.cose.graduates.core.controller.LoginController">
+        <constructor-arg ref="userAccountService" />
+        <property name="homeModelAndView" ref="homeModelAndView" />
+        <property name="loginModelAndView" ref="loginController" />
+    </bean>
+    
+    <bean id="wordsForViewController" class="cn.edu.seu.cose.graduates.core.controller.WordsForViewController">
+        <constructor-arg ref="unfamiliarWordBookdao" />
+        <property name="wordsForViewModelAndView" ref="wordsForViewModelAndView" />
+    </bean>
+</beans>

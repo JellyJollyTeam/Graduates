@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+    <import resource="graduates-persistence.xml" />
+    <bean id="userAccountService" class="cn.edu.seu.cose.graduates.core.service.UserAccountService">
+        <constructor-arg ref="userDao"/>
+    </bean>
+    <bean id="wordBookService" class="cn.edu.seu.cose.graduates.core.service.WordBookService">
+        <constructor-arg ref="unfamiliarWorkBookDao"/>
+        <constructor-arg ref="familiarWorkBookDao"/>
+        <constructor-arg ref="userDao"/>
+    </bean>
+</beans>
