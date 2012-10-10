@@ -9,6 +9,9 @@ Without this configuration present, some functionality in the IDE may be limited
     <spring-data xmlns="http://www.netbeans.org/ns/spring-data/1">
         <config-files>
             <config-file>src/main/resources/cn/edu/seu/cose/graduates/core/config/graduates-application.xml</config-file>
+            <config-file>src/main/resources/cn/edu/seu/cose/graduates/core/config/graduates-model-and-view.xml</config-file>
+            <config-file>src/main/resources/cn/edu/seu/cose/graduates/core/config/graduates-controller.xml</config-file>
+            <config-file>src/main/resources/cn/edu/seu/cose/graduates/core/config/graduates-service.xml</config-file>
         </config-files>
         <config-file-groups/>
     </spring-data>
