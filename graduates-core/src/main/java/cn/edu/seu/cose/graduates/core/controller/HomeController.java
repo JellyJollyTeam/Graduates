@@ -18,7 +18,6 @@ package cn.edu.seu.cose.graduates.core.controller;
 
 import cn.edu.seu.cose.graduates.core.service.UserAccountService;
 import cn.edu.seu.cose.graduates.core.service.WordBookService;
-import cn.edu.seu.cose.graduates.core.view.GraduatesViews;
 import cn.edu.seu.cose.graduates.persistence.dao.DataAccessException;
 import cn.edu.seu.cose.graduates.persistence.model.BookedWord;
 import cn.edu.seu.cose.graduates.persistence.model.User;
@@ -50,10 +49,28 @@ public class HomeController extends AbstractController {
     
     private WordBookService wordBookService;
     
+    private ModelAndView homeModelAndView;
+    
+    private ModelAndView registerModelAndView;
+    
+    private ModelAndView loginModelAndView;
+    
     public HomeController(UserAccountService userAccountService,
             WordBookService wordBookService) {
         this.userAccountService = userAccountService;
         this.wordBookService = wordBookService;
+    }
+    
+    public void setHomeModelAndView(ModelAndView homeModelAndView) {
+        this.homeModelAndView = homeModelAndView;
+    }
+    
+    public void setLoginModelAndView(ModelAndView loginModelAndView) {
+        this.loginModelAndView = loginModelAndView;
+    }
+    
+    public void setRegisterModelAndView(ModelAndView registerModelAndView) {
+        this.registerModelAndView = registerModelAndView;
     }
 
     @Override
@@ -66,18 +83,15 @@ public class HomeController extends AbstractController {
                 GraduatesSessionAttributes.ATTRI_USER);
         
         if (verifiedUserInSession != null) {
-            ModelAndView home = new ModelAndView(GraduatesViews.HOME_VIEW);
-            home.addObject(ATTRI_USER_BEAN, verifiedUserInSession);
-            return home;
+            homeModelAndView.addObject(ATTRI_USER_BEAN, verifiedUserInSession);
+            return homeModelAndView;
         }
         
         String username = getCookieValueByName(request, COOKIE_USERNAME);
         String password = getCookieValueByName(request, COOKIE_PASSWORD);
         boolean cookieIncomplete = username == null || password == null;
         if (cookieIncomplete) {
-            ModelAndView register =
-                    new ModelAndView(GraduatesViews.REGISTER_VIEW);
-            return register;
+            return registerModelAndView;
         }
         
         User verifiedUser = userAccountService.verify(username, password);
@@ -85,15 +99,13 @@ public class HomeController extends AbstractController {
         if (!verified) {
             removeCookieByName(response, COOKIE_USERNAME);
             removeCookieByName(response, COOKIE_PASSWORD);
-            ModelAndView login = new ModelAndView(GraduatesViews.LOGIN_VIEW);
-            return login;
+            return loginModelAndView;
         }
         
         long userId = verifiedUser.getId();
-        ModelAndView home = new ModelAndView(GraduatesViews.HOME_VIEW);
-        home.addObject(ATTRI_USER_BEAN, verifiedUser);
-        addWordsBean(home, userId);
-        return home;
+        homeModelAndView.addObject(ATTRI_USER_BEAN, verifiedUser);
+        addWordsBean(homeModelAndView, userId);
+        return homeModelAndView;
     }
     
     private String getCookieValueByName(

@@ -30,7 +30,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
-import org.springframework.web.servlet.view.RedirectView;
 
 /**
  *
@@ -52,8 +51,14 @@ public class PromoteController extends AbstractController {
     
     private WordBookService wordBookService;
     
+    private ModelAndView redirectModelAndView;
+    
     public PromoteController(WordBookService wordBookService) {
         this.wordBookService = wordBookService;
+    }
+
+    public void setRedirectModelAndView(ModelAndView redirectModelAndView) {
+        this.redirectModelAndView = redirectModelAndView;
     }
 
     @Override
@@ -64,10 +69,7 @@ public class PromoteController extends AbstractController {
         User verifiedUser = (User) currentSession.getAttribute(
                 GraduatesSessionAttributes.ATTRI_USER);
         if (verifiedUser == null) {
-            RedirectView redirectView = new RedirectView();
-            redirectView.setUrl(GraduatesViews.LOGIN_URL);
-            ModelAndView redirect = new ModelAndView(redirectView);
-            return redirect;
+            return redirectModelAndView;
         }
         
         String wordIdParam = request.getParameter(PARAM_WORD_ID);
@@ -95,6 +97,7 @@ public class PromoteController extends AbstractController {
         PrintWriter out = response.getWriter();
         out.print(msg);
         out.flush();
+        out.close();
     }
     
     private void sendSuccessResponse(HttpServletResponse response)

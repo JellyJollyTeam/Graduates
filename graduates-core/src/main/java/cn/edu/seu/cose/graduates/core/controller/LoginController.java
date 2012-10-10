@@ -51,8 +51,20 @@ public class LoginController extends AbstractController {
     
     private UserAccountService userAccountService;
     
+    private ModelAndView homeModelAndView;
+    
+    private ModelAndView loginModelAndView;
+    
     public LoginController(UserAccountService userAccountService) {
         this.userAccountService = userAccountService;
+    }
+
+    public void setHomeModelAndView(ModelAndView homeModelAndView) {
+        this.homeModelAndView = homeModelAndView;
+    }
+
+    public void setLoginModelAndView(ModelAndView loginModelAndView) {
+        this.loginModelAndView = loginModelAndView;
     }
 
     @Override
@@ -67,27 +79,24 @@ public class LoginController extends AbstractController {
             User verifiedUser = userAccountService.verify(username, password);
             boolean verified = (verifiedUser != null);
             if (!verified) {
-                ModelAndView login =
-                        new ModelAndView(GraduatesViews.LOGIN_VIEW);
-                login.addObject(username,
+                loginModelAndView.addObject(username,
                         LoginViewMessage.INCORRECT_USERNAME_OR_PASSWORD);
-                return login;
+                return loginModelAndView;
             }
             addToSession(currentSession, verifiedUser);
-            ModelAndView home = new ModelAndView(GraduatesViews.HOME_VIEW);
-            home.addObject(ATTRI_USER_BEAN, verifiedUser);
-            return home;
+            homeModelAndView.addObject(ATTRI_USER_BEAN, verifiedUser);
+            return homeModelAndView;
         } catch (DataAccessException ex) {
             myLogger.log(Level.SEVERE, ex.getMessage(), ex);
-            ModelAndView errLogin = new ModelAndView(GraduatesViews.LOGIN_VIEW);
-            errLogin.addObject(ATTRI_LOGIN_MSG,
+            loginModelAndView.addObject(ATTRI_LOGIN_MSG,
                     LoginViewMessage.ERROR_OCCURRED);
-            return errLogin;
+            return loginModelAndView;
         }
     }
     
     private void addToSession(HttpSession session, User verifiedUser) {
-        session.setAttribute(GraduatesSessionAttributes.ATTRI_USER, verifiedUser);
+        session.setAttribute(GraduatesSessionAttributes.ATTRI_USER,
+                verifiedUser);
     }
     
     private void clearVerifiedUser(HttpSession session) {
