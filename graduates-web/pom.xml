@@ -1,0 +1,138 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cn.edu.seu.cose.graduates</groupId>
+    <artifactId>graduates-web</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <parent>
+        <groupId>cn.edu.seu.cose</groupId>
+        <artifactId>graduates</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <name>graduates-web</name>
+
+    <organization>
+        <name>Colleage of Software Engineering, Southeast University</name>
+        <url>http://cose.seu.edu.cn/</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>GNU General Public License, Version 3</name>
+            <url>http://www.gnu.org/licenses/</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>71110307</id>
+            <name>Yi Ren</name>
+            <email>408601830@qq.com</email>
+            <organization>Colleage of Software Engineering, Southeast University</organization>
+        </developer>
+        <developer>
+            <id>71110314</id>
+            <name>Chang Zou</name>
+            <email>criminal_z@163.com</email>
+            <organization>Colleage of Software Engineering, Southeast University</organization>
+        </developer>
+        <developer>
+            <id>71110319</id>
+            <name>Jianshuang Wang</name>
+            <email>iostreamin@gmail.com</email>
+            <organization>Colleage of Software Engineering, Southeast University</organization>
+        </developer>
+        <developer>
+            <id>71110320</id>
+            <name>Chunhua Shao</name>
+            <email>forever.fantasy27@gmail.com</email>
+            <organization>Colleage of Software Engineering, Southeast University</organization>
+        </developer>
+        <developer>
+            <id>71110321</id>
+            <name>Wenhao Ji</name>
+            <email>predator.ray@gmail.com</email>
+            <organization>Colleage of Software Engineering, Southeast University</organization>
+        </developer>
+        <developer>
+            <id>71110322</id>
+            <name>Xinwei Yan</name>
+            <email>yan4uoo@gmail.com</email>
+            <organization>Colleage of Software Engineering, Southeast University</organization>
+        </developer>
+    </developers>
+
+    <properties>
+        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>graduates-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>6.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <compilerArguments>
+                        <endorseddirs>${endorsed.dir}</endorseddirs>
+                    </compilerArguments>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.1.1</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.1</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${endorsed.dir}</outputDirectory>
+                            <silent>true</silent>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>javax</groupId>
+                                    <artifactId>javaee-endorsed-api</artifactId>
+                                    <version>6.0</version>
+                                    <type>jar</type>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
