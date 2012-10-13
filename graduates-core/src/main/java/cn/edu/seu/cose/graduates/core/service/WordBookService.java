@@ -24,7 +24,6 @@ import cn.edu.seu.cose.graduates.persistence.dao.UserDataAccess;
 import cn.edu.seu.cose.graduates.persistence.model.BookedWord;
 import cn.edu.seu.cose.graduates.persistence.model.Schedule;
 import cn.edu.seu.cose.graduates.persistence.model.User;
-import cn.edu.seu.cose.graduates.persistence.model.Word;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;

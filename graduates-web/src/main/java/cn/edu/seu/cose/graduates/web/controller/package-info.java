@@ -14,21 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package cn.edu.seu.cose.graduates.core.view;
 
 /**
- *
- * @author zc <cottyard@gmail.com>
- * @author Wenhao Ji <predator.ray@gmail.com>
+ * <b>Controller package</b>
+ * includes all the controller classes that the web-tier invokes
+ * and handle the events from users
  */
-public interface GraduatesViews {
-    
-    public static final String HOME_VIEW = "home";
-    
-    public static final String LOGIN_VIEW = "login";
-    
-    public static final String REGISTER_VIEW = "register";
-    
-    public static final String LOGIN_URL = "/login.jsp";
-    
-}
+package cn.edu.seu.cose.graduates.web.controller;
