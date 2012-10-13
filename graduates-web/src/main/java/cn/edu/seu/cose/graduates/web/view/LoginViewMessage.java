@@ -14,8 +14,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package cn.edu.seu.cose.graduates.web.view;
 
 /**
- * <b>View Package</b> contains the view interface to the web-tier
+ *
+ * @author zc <cottyard@gmail.com>
+ * @author Wenhao Ji <predator.ray@gmail.com>
  */
-package cn.edu.seu.cose.graduates.core.view;
+public enum LoginViewMessage {
+    INCORRECT_USERNAME_OR_PASSWORD, ERROR_OCCURRED
+}

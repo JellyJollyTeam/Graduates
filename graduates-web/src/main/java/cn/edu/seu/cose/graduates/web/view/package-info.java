@@ -16,8 +16,6 @@
  */
 
 /**
- * <b>Controller package</b>
- * includes all the controller classes that the web-tier invokes
- * and handle the events from users
+ * <b>View Package</b> contains the view interface to the web-tier
  */
-package cn.edu.seu.cose.graduates.core.controller;
+package cn.edu.seu.cose.graduates.web.view;

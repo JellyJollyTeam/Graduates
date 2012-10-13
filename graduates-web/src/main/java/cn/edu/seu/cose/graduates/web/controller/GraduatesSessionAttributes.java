@@ -14,13 +14,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package cn.edu.seu.cose.graduates.core.controller;
+package cn.edu.seu.cose.graduates.web.controller;
 
 /**
  *
  * @author zc <cottyard@gmail.com>
- * @author Wenhao Ji <predator.ray@gmail.com>
  */
-public class WordsForTestController {
+public interface GraduatesSessionAttributes {
+    
+    public static final String ATTRI_USER = "user";
     
 }

@@ -14,28 +14,31 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package cn.edu.seu.cose.graduates.core.controller;
+package cn.edu.seu.cose.graduates.web.controller;
 
 import cn.edu.seu.cose.graduates.core.service.WordBookService;
 import cn.edu.seu.cose.graduates.core.util.Utils;
-import cn.edu.seu.cose.graduates.core.view.GraduatesViews;
 import cn.edu.seu.cose.graduates.persistence.dao.DataAccessException;
 import cn.edu.seu.cose.graduates.persistence.model.User;
-import com.sun.istack.internal.logging.Logger;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.AbstractController;
 
 /**
  *
  * @author zc <cottyard@gmail.com>
  */
-public class PromoteController extends AbstractController {
+@Controller
+@RequestMapping("promote.html")
+public class PromoteController {
     
     private static final String FORMAT_ERR_MSG =
             "non-numeric value in wordid.";
@@ -45,7 +48,7 @@ public class PromoteController extends AbstractController {
     private static final String FAILURE = "failure";
     
     private static final Logger myLogger = Logger.getLogger(
-            PromoteController.class);
+            PromoteController.class.getName());
     
     private static final String PARAM_WORD_ID = "wordid";
     
@@ -61,8 +64,8 @@ public class PromoteController extends AbstractController {
         this.redirectModelAndView = redirectModelAndView;
     }
 
-    @Override
-    protected ModelAndView handleRequestInternal(
+    @RequestMapping(method = RequestMethod.POST)
+    protected ModelAndView promoteTheWord(
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         HttpSession currentSession = request.getSession();

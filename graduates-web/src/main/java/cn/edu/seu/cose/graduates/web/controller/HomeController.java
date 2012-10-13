@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package cn.edu.seu.cose.graduates.core.controller;
+package cn.edu.seu.cose.graduates.web.controller;
 
 import cn.edu.seu.cose.graduates.core.service.UserAccountService;
 import cn.edu.seu.cose.graduates.core.service.WordBookService;
@@ -22,20 +22,26 @@ import cn.edu.seu.cose.graduates.persistence.dao.DataAccessException;
 import cn.edu.seu.cose.graduates.persistence.model.BookedWord;
 import cn.edu.seu.cose.graduates.persistence.model.User;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.AbstractController;
 
 /**
  *
  * @author zc <cottyard@gmail.com>
  * @author Wenhao Ji <predator.ray@gmail.com>
  */
-public class HomeController extends AbstractController {
+@Controller
+@RequestMapping(value = "/home.html")
+public class HomeController {
     
     private static final String ATTRI_USER_BEAN = "user";
     
@@ -44,6 +50,9 @@ public class HomeController extends AbstractController {
     private static final String COOKIE_USERNAME = "username";
     
     private static final String COOKIE_PASSWORD = "password";
+    
+    private static final Logger logger = Logger.getLogger(
+            HomeController.class.getName());
     
     private UserAccountService userAccountService;
     
@@ -73,10 +82,9 @@ public class HomeController extends AbstractController {
         this.registerModelAndView = registerModelAndView;
     }
 
-    @Override
-    protected ModelAndView handleRequestInternal(
-            HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
+    @RequestMapping(method = RequestMethod.GET)
+    protected ModelAndView handleHomePageRequest(
+            HttpServletRequest request, HttpServletResponse response) {
         HttpSession currentSession = request.getSession();
         User verifiedUserInSession =
                 (User) currentSession.getAttribute(
@@ -94,18 +102,23 @@ public class HomeController extends AbstractController {
             return registerModelAndView;
         }
         
-        User verifiedUser = userAccountService.verify(username, password);
-        boolean verified = (verifiedUser != null);
-        if (!verified) {
-            removeCookieByName(response, COOKIE_USERNAME);
-            removeCookieByName(response, COOKIE_PASSWORD);
-            return loginModelAndView;
+        try {
+            User verifiedUser = userAccountService.verify(username, password);
+            boolean verified = (verifiedUser != null);
+            if (!verified) {
+                removeCookieByName(response, COOKIE_USERNAME);
+                removeCookieByName(response, COOKIE_PASSWORD);
+                return loginModelAndView;
+            }
+
+            long userId = verifiedUser.getId();
+            homeModelAndView.addObject(ATTRI_USER_BEAN, verifiedUser);
+            addWordsBean(homeModelAndView, userId);
+            return homeModelAndView;
+        } catch (DataAccessException ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            return homeModelAndView;
         }
-        
-        long userId = verifiedUser.getId();
-        homeModelAndView.addObject(ATTRI_USER_BEAN, verifiedUser);
-        addWordsBean(homeModelAndView, userId);
-        return homeModelAndView;
     }
     
     private String getCookieValueByName(

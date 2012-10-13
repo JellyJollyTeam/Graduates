@@ -14,9 +14,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package cn.edu.seu.cose.graduates.core.controller;
+package cn.edu.seu.cose.graduates.web.controller;
 
-import cn.edu.seu.cose.graduates.core.view.GraduatesViews;
 import cn.edu.seu.cose.graduates.persistence.dao.UnfamiliarWordBookDataAccess;
 import cn.edu.seu.cose.graduates.persistence.model.BookedWord;
 import cn.edu.seu.cose.graduates.persistence.model.User;
@@ -24,22 +23,27 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.Controller;
-import org.springframework.web.servlet.view.RedirectView;
 
 /**
  *
  * @author zc <cottyard@gmail.com>
  * @author Wenhao Ji <predator.ray@gmail.com>
  */
-public class WordsForViewController implements Controller {
+@Controller
+@RequestMapping("wordsforview.html")
+public class WordsForViewController {
     
     private static final String ATTRI_WORDS_FOR_VIEW = "wordsForView";
     
     private static final int VIEW_PHASE = 0;
     
     private ModelAndView wordsForViewModelAndView;
+    
+    private ModelAndView redirectToLoginModelAndView;
     
     private UnfamiliarWordBookDataAccess unfamiliarWordBookdao;
     
@@ -52,7 +56,13 @@ public class WordsForViewController implements Controller {
             ModelAndView wordsForViewModelAndView) {
         this.wordsForViewModelAndView = wordsForViewModelAndView;
     }
-
+    
+    public void setRedirectToLoginModelAndView(
+            ModelAndView redirectToLoginModelAndView) {
+        this.redirectToLoginModelAndView = redirectToLoginModelAndView;
+    }
+    
+    @RequestMapping(method = RequestMethod.GET)
     public ModelAndView handleRequest(
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
@@ -60,10 +70,7 @@ public class WordsForViewController implements Controller {
         User verifiedUser = (User) currentSession.getAttribute(
                 GraduatesSessionAttributes.ATTRI_USER);
         if (verifiedUser == null) {
-            RedirectView redirectView = new RedirectView();
-            redirectView.setUrl(GraduatesViews.LOGIN_URL);
-            ModelAndView redirect = new ModelAndView(redirectView);
-            return redirect;
+            return redirectToLoginModelAndView;
         }
         
         long userId = verifiedUser.getId();
