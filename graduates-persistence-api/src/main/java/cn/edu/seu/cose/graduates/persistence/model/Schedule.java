@@ -26,13 +26,13 @@ import java.util.List;
  */
 public class Schedule {
     
-    private List<Date> deltaTimeTable;
+    private List<Long> deltaTimeTable;
 
-    public List<Date> getDeltaTimeTable() {
+    public List<Long> getDeltaTimeTable() {
         return deltaTimeTable;
     }
 
-    public void setDeltaTimeTable(List<Date> deltaTimeTable) {
+    public void setDeltaTimeTable(List<Long> deltaTimeTable) {
         this.deltaTimeTable = deltaTimeTable;
     }
 
