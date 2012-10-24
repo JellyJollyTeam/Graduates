@@ -36,6 +36,9 @@ public class WordDataAccessImpl extends AbstractDataAccess
     public Word getWordById(long wordId) throws DataAccessException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+    
+    private static final String CREATE_WORD_STATEMENT =
+            "INSERT INTO grad_words(english, explanation) VALUES (?, ?);";
 
     public long createWord(String english, String explanation)
             throws DataAccessException {
