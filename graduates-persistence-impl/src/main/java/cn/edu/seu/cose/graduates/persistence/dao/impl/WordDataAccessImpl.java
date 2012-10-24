@@ -14,13 +14,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package cn.edu.seu.cose.graduates.persistence.dao.impl;
 
 import cn.edu.seu.cose.graduates.persistence.dao.DataAccessException;
 import cn.edu.seu.cose.graduates.persistence.dao.WordDataAccess;
 import cn.edu.seu.cose.graduates.persistence.model.Word;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
 import javax.sql.DataSource;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,13 +33,32 @@ import javax.sql.DataSource;
  */
 public class WordDataAccessImpl extends AbstractDataAccess
         implements WordDataAccess {
-    
+
+    private static Logger logger = Logger.getLogger(
+            UserDataAccessImpl.class.getName());
+
     public WordDataAccessImpl(DataSource dataSource) {
         super(dataSource);
     }
 
     public Word getWordById(long wordId) throws DataAccessException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Connection conn = getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement("select * from grad_words where word_id=?");
+            ps.setLong(1, wordId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Word word = new Word();
+                word.setId(wordId);
+                word.setEnglish(rs.getString("english"));
+                word.setExplanation("description");
+                return word;
+            }
+            return null;
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new DataAccessException(ex);
+        }
     }
 
     public long createWord(String english, String explanation)
@@ -54,5 +78,4 @@ public class WordDataAccessImpl extends AbstractDataAccess
     public void deleteWord(long wordId) throws DataAccessException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
 }
