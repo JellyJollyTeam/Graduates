@@ -60,6 +60,9 @@ public class WordDataAccessImpl extends AbstractDataAccess
             throw new DataAccessException(ex);
         }
     }
+    
+    private static final String CREATE_WORD_STATEMENT =
+            "INSERT INTO grad_words(english, explanation) VALUES (?, ?);";
 
     public long createWord(String english, String explanation)
             throws DataAccessException {

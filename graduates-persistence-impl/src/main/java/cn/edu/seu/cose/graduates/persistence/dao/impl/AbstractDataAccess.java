@@ -23,12 +23,16 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sql.DataSource;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  *
  * @author rAy <predator.ray@gmail.com>
  */
 abstract class AbstractDataAccess {
+    
+    private static final Logger logger = Logger.getLogger(
+            AbstractDataAccess.class.getName());
     
     private DataSource dateSource;
     
@@ -40,8 +44,13 @@ abstract class AbstractDataAccess {
         try {
             return dateSource.getConnection();
         } catch (SQLException ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DataAccessException(ex);
         }
+    }
+    
+    protected JdbcTemplate getJdbcTemplate() {
+        return new JdbcTemplate(dateSource);
     }
 
 }

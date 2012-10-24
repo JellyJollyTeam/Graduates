@@ -16,7 +16,7 @@
  */
 package cn.edu.seu.cose.graduates.web.controller;
 
-import cn.edu.seu.cose.graduates.persistence.dao.UnfamiliarWordBookDataAccess;
+import cn.edu.seu.cose.graduates.core.service.WordBookService;
 import cn.edu.seu.cose.graduates.persistence.model.BookedWord;
 import cn.edu.seu.cose.graduates.persistence.model.User;
 import java.util.List;
@@ -45,11 +45,10 @@ public class WordsForViewController {
     
     private ModelAndView redirectToLoginModelAndView;
     
-    private UnfamiliarWordBookDataAccess unfamiliarWordBookdao;
+    private WordBookService wordBookService;
     
-    public WordsForViewController(
-            UnfamiliarWordBookDataAccess unfamiliarWordBookdao) {
-        this.unfamiliarWordBookdao = unfamiliarWordBookdao;
+    public WordsForViewController(WordBookService wordBookService) {
+        this.wordBookService = wordBookService;
     }
 
     public void setWordsForViewModelAndView(
@@ -75,7 +74,7 @@ public class WordsForViewController {
         
         long userId = verifiedUser.getId();
         List<BookedWord> wordsForView =
-                unfamiliarWordBookdao.getBookedWordsByPhase(userId, VIEW_PHASE);
+                wordBookService.getWordsForView(userId);
         wordsForViewModelAndView.addObject(ATTRI_WORDS_FOR_VIEW, wordsForView);
         return wordsForViewModelAndView;
     }
