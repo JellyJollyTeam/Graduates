@@ -1,0 +1,35 @@
+/* 
+    Document   : login
+    Created on : 2012-10-24, 13:08:26
+    Author     : fantasy
+    Description:
+        Purpose of the stylesheet follows.
+        The addtional stylesheet of login.jsp
+*/
+/*
+The style of the login form.
+*/
+#login{
+    width: 30%;
+    padding: 1%;
+    margin-top:10%;
+    margin-left: 30%;
+    margin-right: 30%;
+    background-color: #fafafa;
+    background-image: -moz-linear-gradient(top, #ffffff, #f2f2f2);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f2f2f2));
+    background-image: -webkit-linear-gradient(top, #ffffff, #f2f2f2);
+    background-image: -o-linear-gradient(top, #ffffff, #f2f2f2);
+    background-image: linear-gradient(to bottom, #ffffff, #f2f2f2);
+    background-repeat: repeat-x;
+    border: 1px solid #d4d4d4;
+    -webkit-border-radius: 8px;
+       -moz-border-radius: 8px;
+            border-radius: 8px;
+    filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff2f2f2', GradientType=0);
+    *zoom: 1;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+       -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+}
+

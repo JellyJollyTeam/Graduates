@@ -17,8 +17,11 @@
 
 package cn.edu.seu.cose.graduates.persistence.dao.impl;
 
+import cn.edu.seu.cose.graduates.persistence.dao.DataAccessException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sql.DataSource;
 
 /**
@@ -33,8 +36,12 @@ abstract class AbstractDataAccess {
         this.dateSource = dateSource;
     }
     
-    protected Connection getConnection() throws SQLException {
-        return dateSource.getConnection();
+    protected Connection getConnection() throws DataAccessException {
+        try {
+            return dateSource.getConnection();
+        } catch (SQLException ex) {
+            throw new DataAccessException(ex);
+        }
     }
 
 }
