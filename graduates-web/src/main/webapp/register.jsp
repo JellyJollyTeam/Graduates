@@ -1,6 +1,6 @@
 <%-- 
-    Document   : home
-    Created on : 2012-10-24, 13:02:24
+    Document   : register
+    Created on : 2012-10-24, 13:00:13
     Author     : fantasy
 --%>
 
