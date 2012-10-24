@@ -86,6 +86,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>3.1.2.RELEASE</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
 </project>
