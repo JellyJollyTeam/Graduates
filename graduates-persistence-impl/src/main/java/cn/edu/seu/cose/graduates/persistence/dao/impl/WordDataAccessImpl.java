@@ -23,9 +23,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
-import javax.sql.DataSource;
 import java.util.logging.Logger;
+import javax.sql.DataSource;
 
 /**
  *
@@ -66,19 +67,67 @@ public class WordDataAccessImpl extends AbstractDataAccess
 
     public long createWord(String english, String explanation)
             throws DataAccessException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Connection conn = getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement("insert into grad_words(english,description) "
+                    + "values(?,?)",Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, english);
+            ps.setString(2, explanation);
+            ps.executeUpdate();
+            ResultSet rs = ps.getResultSet();
+            if(rs.next()){
+                long word_id = rs.getLong(1);
+                return word_id;
+            }
+            return -1;
+        } catch(SQLException ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new DataAccessException(ex);
+        }
     }
 
     public void updateWord(Word word) throws DataAccessException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Connection conn = getConnection();
+        try {
+            long wordId = word.getId();
+            String wordEnglish = word.getEnglish();
+            String wordDescription = word.getExplanation();
+            PreparedStatement ps = conn.prepareStatement("update grad_words "
+                    + "set english= ? ,description = ? where word_id= ?");
+            ps.setString(1, wordEnglish);
+            ps.setString(2, wordDescription);
+            ps.setLong(3, wordId);
+            ps.executeUpdate();
+        } catch(SQLException ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new DataAccessException(ex);
+        }
     }
 
     public void updateWordExplanation(long wordId, String explanation)
             throws DataAccessException {
-        throw new UnsupportedOperationException("Not supported yet.");
+          Connection conn = getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement("update grad_words "
+                    + "set description = ? where word_id= ?");
+            ps.setString(1, explanation);
+            ps.setLong(2, wordId);
+            ps.executeUpdate();
+        } catch(SQLException ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new DataAccessException(ex);
+        }
     }
 
     public void deleteWord(long wordId) throws DataAccessException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Connection conn = getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement("delete from grad_words where word_id = ?");
+            ps.setLong(1, wordId);
+            ps.executeUpdate();
+        } catch(SQLException ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new DataAccessException(ex);
+        }
     }
 }
